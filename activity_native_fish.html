@@ -932,8 +932,8 @@ const fishData = [
     },
     {
         id: 9,
-        name: '鳑鲏鱼',
-        nameEn: 'Bitterling',
+        name: '大鳍鱊',
+        nameEn: 'Large-fin Bitterling',
         latin: 'Acheilognathus macropterus',
         emoji: '🌈',
         category: ['bitterling'],
@@ -1088,6 +1088,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 // 初始渲染
 renderGrid(fishData);
+document.getElementById('totalCount').textContent = fishData.length;
 </script>
 </body>
 </html>
