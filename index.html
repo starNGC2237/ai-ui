@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水界漫游 · 超级海鸥主题 — 海水鱼活动</title>
+    <style>
+        /* ========== 超级海鸥主题色彩系统 ========== */
+        :root {
+            --soda:          #87D4F9; /* 便利店汽水 */
+            --lemon:         #FFEA92; /* 冰镇柠檬 */
+            --watermelon:    #A4E2B8; /* 西瓜冰沙 */
+            --sunset:        #FFC8A2; /* 海岸黄昏 */
+            --breeze:        #C0DAFF; /* 空调凉风 */
+            --icecream:      #FFD9E8; /* 草莓雪糕 */
+            --mint:          #B2F5EA; /* 海洋薄荷 */
+            --shell:         #FCD5CE; /* 沙滩贝壳 */
+            --seagull:       #9AD3DE; /* 超级海鸥 */
+
+            --text-dark:     #2C3E50;
+            --text-mid:      #4A6572;
+            --text-light:    #7A9AAF;
+            --white:         #FFFFFF;
+            --bg-main:       #F0FAFE;
+            --card-shadow:   rgba(154, 211, 222, 0.25);
+        }
+
+        /* ========== 基础重置 ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ========== 海浪背景动画 ========== */
+        .ocean-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--breeze) 0%, var(--bg-main) 40%, var(--white) 100%);
+        }
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 180px;
+            opacity: .35;
+            border-radius: 40%;
+        }
+        .wave-1 {
+            background: var(--soda);
+            animation: wave 8s ease-in-out infinite;
+        }
+        .wave-2 {
+            background: var(--seagull);
+            animation: wave 10s ease-in-out infinite reverse;
+            bottom: -20px;
+        }
+        .wave-3 {
+            background: var(--mint);
+            animation: wave 12s ease-in-out infinite;
+            bottom: -40px;
+            opacity: .2;
+        }
+        @keyframes wave {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            50%      { transform: translateX(-25%) rotate(2deg); }
+        }
+
+        /* ========== 海鸥飞行动画 ========== */
+        .seagulls {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 200px;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .seagull-bird {
+            position: absolute;
+            font-size: 22px;
+            opacity: .5;
+            animation: fly linear infinite;
+        }
+        .seagull-bird:nth-child(1) { top: 30px;  left: -40px; animation-duration: 14s; animation-delay: 0s; }
+        .seagull-bird:nth-child(2) { top: 60px;  left: -40px; animation-duration: 18s; animation-delay: 3s; font-size: 16px; opacity: .3; }
+        .seagull-bird:nth-child(3) { top: 90px;  left: -40px; animation-duration: 22s; animation-delay: 6s; font-size: 12px; opacity: .25; }
+        .seagull-bird:nth-child(4) { top: 45px;  left: -40px; animation-duration: 16s; animation-delay: 8s; opacity: .4; }
+        @keyframes fly {
+            0%   { transform: translateX(-40px) translateY(0); }
+            25%  { transform: translateX(25vw)  translateY(-12px); }
+            50%  { transform: translateX(50vw)  translateY(5px); }
+            75%  { transform: translateX(75vw)  translateY(-8px); }
+            100% { transform: translateX(105vw) translateY(0); }
+        }
+
+        /* ========== 气泡粒子 ========== */
+        .bubbles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .bubble {
+            position: absolute;
+            bottom: -30px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: rise linear infinite;
+        }
+        .bubble:nth-child(1)  { left: 10%; width: 14px; height: 14px; background: var(--soda);       animation-duration: 10s; animation-delay: 0s; }
+        .bubble:nth-child(2)  { left: 25%; width: 10px; height: 10px; background: var(--mint);       animation-duration: 12s; animation-delay: 2s; }
+        .bubble:nth-child(3)  { left: 40%; width: 18px; height: 18px; background: var(--lemon);      animation-duration: 14s; animation-delay: 1s; }
+        .bubble:nth-child(4)  { left: 55%; width: 8px;  height: 8px;  background: var(--icecream);   animation-duration: 11s; animation-delay: 4s; }
+        .bubble:nth-child(5)  { left: 70%; width: 12px; height: 12px; background: var(--seagull);    animation-duration: 13s; animation-delay: 3s; }
+        .bubble:nth-child(6)  { left: 85%; width: 16px; height: 16px; background: var(--watermelon); animation-duration: 15s; animation-delay: 5s; }
+        .bubble:nth-child(7)  { left: 15%; width: 6px;  height: 6px;  background: var(--breeze);     animation-duration: 9s;  animation-delay: 6s; }
+        .bubble:nth-child(8)  { left: 60%; width: 20px; height: 20px; background: var(--shell);      animation-duration: 16s; animation-delay: 1s; }
+        @keyframes rise {
+            0%   { transform: translateY(0) scale(0.5); opacity: 0; }
+            10%  { opacity: 0.5; }
+            90%  { opacity: 0.3; }
+            100% { transform: translateY(-110vh) scale(1); opacity: 0; }
+        }
+
+        /* ========== 页面容器 ========== */
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 16px 60px;
+        }
+
+        /* ========== 顶部横幅 ========== */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--seagull), var(--soda), var(--mint));
+            border-radius: 24px;
+            padding: 48px 36px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 32px var(--card-shadow);
+        }
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -30%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-banner::after {
+            content: '🕊️';
+            position: absolute;
+            top: 16px; right: 24px;
+            font-size: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50%      { transform: translateY(-10px) rotate(5deg); }
+        }
+        .hero-logo {
+            font-size: 14px;
+            color: var(--white);
+            background: rgba(255,255,255,0.25);
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(4px);
+            letter-spacing: 2px;
+        }
+        .hero-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--white);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 8px;
+        }
+        .hero-title span {
+            display: inline-block;
+            background: var(--lemon);
+            color: var(--text-dark);
+            padding: 2px 12px;
+            border-radius: 8px;
+            margin-left: 6px;
+            font-size: 18px;
+            vertical-align: middle;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .hero-sub {
+            font-size: 15px;
+            color: rgba(255,255,255,0.9);
+            margin-top: 8px;
+        }
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .hero-tag {
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(6px);
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* ========== 统计栏 ========== */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .stat-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 18px 14px;
+            text-align: center;
+            box-shadow: 0 2px 12px var(--card-shadow);
+            transition: transform .25s;
+        }
+        .stat-card:hover { transform: translateY(-3px); }
+        .stat-icon { font-size: 28px; margin-bottom: 6px; }
+        .stat-num  { font-size: 22px; font-weight: 800; color: var(--text-dark); }
+        .stat-label { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+        /* ========== 搜索与筛选 ========== */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            border-radius: 14px;
+            padding: 10px 16px;
+            box-shadow: 0 2px 12px var(--card-shadow);
+            border: 2px solid transparent;
+            transition: border-color .2s;
+        }
+        .search-box:focus-within { border-color: var(--seagull); }
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background: transparent;
+            color: var(--text-dark);
+        }
+        .search-box input::placeholder { color: var(--text-light); }
+        .search-icon { margin-right: 8px; font-size: 16px; color: var(--text-light); }
+
+        .filter-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .pill {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            border: 2px solid var(--seagull);
+            background: var(--white);
+            color: var(--text-mid);
+            transition: all .2s;
+            user-select: none;
+        }
+        .pill:hover { background: var(--seagull); color: var(--white); }
+        .pill.active { background: var(--seagull); color: var(--white); box-shadow: 0 2px 8px var(--card-shadow); }
+
+        /* ========== 鱼卡片网格 ========== */
+        .fish-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+        .fish-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px var(--card-shadow);
+            transition: transform .3s, box-shadow .3s;
+            cursor: pointer;
+            position: relative;
+        }
+        .fish-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(154, 211, 222, 0.35);
+        }
+        .fish-card .card-visual {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .fish-card .card-visual .fish-emoji {
+            font-size: 72px;
+            z-index: 1;
+            transition: transform .4s;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        .fish-card:hover .fish-emoji { transform: scale(1.12) rotate(-3deg); }
+        .card-visual .ripple {
+            position: absolute;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            opacity: .2;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: .2; }
+            50%      { transform: scale(1.3); opacity: .08; }
+        }
+        .card-body {
+            padding: 16px 18px 18px;
+        }
+        .fish-name-cn {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .fish-name-en {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+        .fish-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .meta-tag {
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .fish-desc {
+            font-size: 13px;
+            color: var(--text-mid);
+            margin-top: 10px;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .fish-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f4f8;
+        }
+        .difficulty {
+            display: flex;
+            gap: 3px;
+        }
+        .difficulty .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #e0e8f0;
+        }
+        .difficulty .dot.filled { background: var(--seagull); }
+        .btn-detail {
+            font-size: 12px;
+            color: var(--seagull);
+            border: 1.5px solid var(--seagull);
+            padding: 4px 14px;
+            border-radius: 12px;
+            background: transparent;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .btn-detail:hover { background: var(--seagull); color: var(--white); }
+
+        /* ========== 温馨 Banner ========== */
+        .promo-banner {
+            background: linear-gradient(135deg, var(--sunset), var(--icecream), var(--shell));
+            border-radius: 20px;
+            padding: 32px 28px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 36px;
+            box-shadow: 0 4px 20px rgba(252, 213, 206, 0.35);
+        }
+        .promo-icon { font-size: 56px; flex-shrink: 0; }
+        .promo-text h3 {
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        .promo-text p {
+            font-size: 13px;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        /* ========== 每日推荐 ========== */
+        .daily-pick {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 4px 20px var(--card-shadow);
+            margin-bottom: 36px;
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .daily-pick-visual {
+            width: 160px; height: 160px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .daily-pick-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            background: inherit;
+            opacity: .3;
+            filter: blur(20px);
+            z-index: 0;
+        }
+        .daily-pick-visual span { z-index: 1; }
+        .daily-info { flex: 1; min-width: 200px; }
+        .daily-label {
+            display: inline-block;
+            background: var(--lemon);
+            color: var(--text-dark);
+            padding: 3px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .daily-info h2 {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .daily-info .latin {
+            font-size: 13px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        .daily-info p {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--text-mid);
+            line-height: 1.7;
+        }
+        .daily-attrs {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .daily-attr {
+            text-align: center;
+        }
+        .daily-attr .val {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--seagull);
+        }
+        .daily-attr .lbl {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        /* ========== 页脚 ========== */
+        .page-footer {
+            text-align: center;
+            padding: 30px 0 20px;
+            color: var(--text-light);
+            font-size: 12px;
+        }
+        .page-footer .brand {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--seagull);
+            margin-bottom: 4px;
+        }
+        .theme-colors {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .theme-dot {
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            transition: transform .2s;
+            cursor: pointer;
+        }
+        .theme-dot:hover { transform: scale(1.4); }
+
+        /* ========== 弹窗 / 详情面板 ========== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal-content {
+            background: var(--white);
+            border-radius: 24px;
+            max-width: 480px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            animation: slideUp .35s ease;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .modal-header {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px; right: 16px;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.8);
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: background .2s;
+        }
+        .modal-close:hover { background: var(--white); }
+        .modal-body {
+            padding: 24px;
+        }
+        .modal-body h2 {
+            font-size: 22px;
+            color: var(--text-dark);
+        }
+        .modal-body .latin {
+            font-size: 13px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        .modal-body .desc {
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-mid);
+            line-height: 1.8;
+        }
+        .modal-attrs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .modal-attr {
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+        .modal-attr .val {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--seagull);
+        }
+        .modal-attr .lbl {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 600px) {
+            .hero-title { font-size: 24px; }
+            .hero-banner { padding: 32px 20px; }
+            .daily-pick { flex-direction: column; text-align: center; }
+            .daily-pick-visual { width: 120px; height: 120px; font-size: 60px; margin: 0 auto; }
+            .promo-banner { flex-direction: column; text-align: center; }
+            .fish-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景层 -->
+    <div class="ocean-bg">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
+    </div>
+    <div class="seagulls">
+        <div class="seagull-bird">🕊️</div>
+        <div class="seagull-bird">🕊️</div>
+        <div class="seagull-bird">🕊️</div>
+        <div class="seagull-bird">🕊️</div>
+    </div>
+    <div class="bubbles">
+        <div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div>
+    </div>
+
+    <div class="page-wrapper">
+
+        <!-- 顶部横幅 -->
+        <header class="hero-banner">
+            <div class="hero-logo">🌊 水界漫游 AQUA EXPLORER</div>
+            <h1 class="hero-title">夏日海水鱼图鉴 <span>🐠 超级海鸥主题</span></h1>
+            <p class="hero-sub">清凉一夏 · 探索海洋中最迷人的居民们</p>
+            <div class="hero-tags">
+                <span class="hero-tag">🧊 便利店汽水</span>
+                <span class="hero-tag">🍋 冰镇柠檬</span>
+                <span class="hero-tag">🍉 西瓜冰沙</span>
+                <span class="hero-tag">🕊️ 超级海鸥</span>
+            </div>
+        </header>
+
+        <!-- 统计栏 -->
+        <section class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-icon">🐟</div>
+                <div class="stat-num" id="totalCount">12</div>
+                <div class="stat-label">收录鱼种</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌏</div>
+                <div class="stat-num">7</div>
+                <div class="stat-label">分布海域</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎨</div>
+                <div class="stat-num">9</div>
+                <div class="stat-label">主题配色</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-num">4</div>
+                <div class="stat-label">珍稀物种</div>
+            </div>
+        </section>
+
+        <!-- 每日推荐 -->
+        <section class="daily-pick">
+            <div class="daily-pick-visual" style="background: linear-gradient(135deg, var(--soda), var(--mint));">
+                <span>🐠</span>
+            </div>
+            <div class="daily-info">
+                <div class="daily-label">⭐ 今日推荐</div>
+                <h2>小丑鱼</h2>
+                <div class="latin">Amphiprion ocellaris</div>
+                <p>色彩鲜艳的小丑鱼与海葵共生，是海洋中最受欢迎的鱼类之一。它们身披亮橙色外衣，配以白色条纹，宛如夏日海边最亮眼的风景。</p>
+                <div class="daily-attrs">
+                    <div class="daily-attr">
+                        <div class="val">11cm</div>
+                        <div class="lbl">体长</div>
+                    </div>
+                    <div class="daily-attr">
+                        <div class="val">6-10年</div>
+                        <div class="lbl">寿命</div>
+                    </div>
+                    <div class="daily-attr">
+                        <div class="val">26°C</div>
+                        <div class="lbl">适宜水温</div>
+                    </div>
+                    <div class="daily-attr">
+                        <div class="val">★★☆</div>
+                        <div class="lbl">饲养难度</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 搜索与筛选 -->
+        <div class="toolbar">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="搜索鱼类名称、学名..." oninput="filterFish()">
+            </div>
+            <div class="filter-pills">
+                <button class="pill active" onclick="setFilter('all', this)">全部</button>
+                <button class="pill" onclick="setFilter('tropical', this)">热带鱼</button>
+                <button class="pill" onclick="setFilter('deep', this)">深海鱼</button>
+                <button class="pill" onclick="setFilter('reef', this)">珊瑚礁</button>
+                <button class="pill" onclick="setFilter('rare', this)">珍稀</button>
+            </div>
+        </div>
+
+        <!-- 鱼卡片网格 -->
+        <div class="fish-grid" id="fishGrid"></div>
+
+        <!-- 温馨提示 Banner -->
+        <div class="promo-banner">
+            <div class="promo-icon">🏖️</div>
+            <div class="promo-text">
+                <h3>超级海鸥主题 · 夏日限定活动</h3>
+                <p>集齐 9 种主题配色徽章即可获得「海鸥漫游者」称号！探索每一种海水鱼，感受便利店汽水般的清凉、冰镇柠檬的爽朗、西瓜冰沙的甜美……让这个夏天充满色彩与惊喜。</p>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="page-footer">
+            <div class="brand">🌊 水界漫游 Aqua Explorer</div>
+            <p>超级海鸥主题 · Super Seagull Theme</p>
+            <p style="margin-top: 4px;">© 2026 水界漫游 · 用清凉拥抱海洋</p>
+            <div class="theme-colors">
+                <div class="theme-dot" style="background: var(--soda);" title="便利店汽水"></div>
+                <div class="theme-dot" style="background: var(--lemon);" title="冰镇柠檬"></div>
+                <div class="theme-dot" style="background: var(--watermelon);" title="西瓜冰沙"></div>
+                <div class="theme-dot" style="background: var(--sunset);" title="海岸黄昏"></div>
+                <div class="theme-dot" style="background: var(--breeze);" title="空调凉风"></div>
+                <div class="theme-dot" style="background: var(--icecream);" title="草莓雪糕"></div>
+                <div class="theme-dot" style="background: var(--mint);" title="海洋薄荷"></div>
+                <div class="theme-dot" style="background: var(--shell);" title="沙滩贝壳"></div>
+                <div class="theme-dot" style="background: var(--seagull);" title="超级海鸥"></div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 详情弹窗 -->
+    <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header" id="modalHeader">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <span id="modalEmoji" style="z-index:1;"></span>
+            </div>
+            <div class="modal-body">
+                <h2 id="modalName"></h2>
+                <div class="latin" id="modalLatin"></div>
+                <div class="desc" id="modalDesc"></div>
+                <div class="modal-attrs" id="modalAttrs"></div>
+            </div>
+        </div>
+    </div>
+
+<script>
+// ========== 海水鱼数据库 ==========
+const fishData = [
+    {
+        id: 1,
+        name: '小丑鱼',
+        nameEn: 'Clownfish',
+        latin: 'Amphiprion ocellaris',
+        emoji: '🐠',
+        category: ['tropical', 'reef'],
+        color: 'var(--sunset)',
+        bgGradient: 'linear-gradient(135deg, var(--sunset), var(--lemon))',
+        tags: [
+            { text: '热带', bg: 'var(--sunset)', color: '#7a4a2a' },
+            { text: '珊瑚礁', bg: 'var(--mint)', color: '#2a6b5a' }
+        ],
+        desc: '与海葵共生的热带鱼，身披鲜亮的橙白条纹，是海洋中的人气明星。性格勇敢，常勇于保护自己的领地。',
+        size: '11cm', temp: '25-28°C', depth: '1-15m', lifespan: '6-10年', difficulty: 2,
+        region: '印度洋-太平洋'
+    },
+    {
+        id: 2,
+        name: '蓝唐王鱼',
+        nameEn: 'Blue Tang',
+        latin: 'Paracanthurus hepatus',
+        emoji: '🐟',
+        category: ['tropical', 'reef'],
+        color: 'var(--soda)',
+        bgGradient: 'linear-gradient(135deg, var(--soda), var(--breeze))',
+        tags: [
+            { text: '热带', bg: 'var(--soda)', color: '#2a5a7a' },
+            { text: '珊瑚礁', bg: 'var(--breeze)', color: '#3a5a8a' }
+        ],
+        desc: '拥有宝石般的钴蓝色身体与鲜黄尾鳍。性情活泼好动，在珊瑚丛间穿梭时宛如一抹便利店汽水的清凉蓝。',
+        size: '31cm', temp: '24-28°C', depth: '2-40m', lifespan: '8-20年', difficulty: 3,
+        region: '印度洋-太平洋'
+    },
+    {
+        id: 3,
+        name: '狮子鱼',
+        nameEn: 'Lionfish',
+        latin: 'Pterois volitans',
+        emoji: '🦁',
+        category: ['tropical', 'reef', 'rare'],
+        color: 'var(--icecream)',
+        bgGradient: 'linear-gradient(135deg, var(--icecream), var(--shell))',
+        tags: [
+            { text: '珍稀', bg: 'var(--icecream)', color: '#8a3a5a' },
+            { text: '有毒', bg: 'var(--shell)', color: '#8a5a4a' }
+        ],
+        desc: '华丽的鳍条如羽毛般展开，美丽却暗藏危机——它的棘刺含有毒液。如同草莓雪糕般甜美的外表下是不可小觑的实力。',
+        size: '38cm', temp: '22-28°C', depth: '1-50m', lifespan: '10-15年', difficulty: 4,
+        region: '印度洋-太平洋'
+    },
+    {
+        id: 4,
+        name: '黄高鳍刺尾鱼',
+        nameEn: 'Yellow Tang',
+        latin: 'Zebrasoma flavescens',
+        emoji: '💛',
+        category: ['tropical', 'reef'],
+        color: 'var(--lemon)',
+        bgGradient: 'linear-gradient(135deg, var(--lemon), var(--sunset))',
+        tags: [
+            { text: '热带', bg: 'var(--lemon)', color: '#7a6a2a' },
+            { text: '素食', bg: 'var(--watermelon)', color: '#2a6b4a' }
+        ],
+        desc: '通体明黄如冰镇柠檬，是珊瑚礁中最醒目的存在。以藻类为食，是海洋清洁工的一员，性格温和。',
+        size: '20cm', temp: '24-28°C', depth: '2-46m', lifespan: '30年+', difficulty: 2,
+        region: '太平洋'
+    },
+    {
+        id: 5,
+        name: '海马',
+        nameEn: 'Seahorse',
+        latin: 'Hippocampus kuda',
+        emoji: '🌊',
+        category: ['tropical', 'rare'],
+        color: 'var(--seagull)',
+        bgGradient: 'linear-gradient(135deg, var(--seagull), var(--mint))',
+        tags: [
+            { text: '珍稀', bg: 'var(--seagull)', color: '#2a5a6a' },
+            { text: '独特', bg: 'var(--mint)', color: '#2a6b5a' }
+        ],
+        desc: '形态独特的海洋精灵，直立游动的姿态优雅迷人。雄性海马负责孕育后代，是自然界中令人惊叹的父亲。',
+        size: '17cm', temp: '22-27°C', depth: '1-20m', lifespan: '1-5年', difficulty: 5,
+        region: '印度洋-太平洋'
+    },
+    {
+        id: 6,
+        name: '曼塔鳐',
+        nameEn: 'Manta Ray',
+        latin: 'Mobula birostris',
+        emoji: '🦈',
+        category: ['deep', 'rare'],
+        color: 'var(--breeze)',
+        bgGradient: 'linear-gradient(135deg, var(--breeze), var(--soda))',
+        tags: [
+            { text: '深海', bg: 'var(--breeze)', color: '#3a5a8a' },
+            { text: '珍稀', bg: 'var(--seagull)', color: '#2a5a6a' }
+        ],
+        desc: '翼展可达7米的海洋巨人，如同空调凉风般优雅地滑翔于深蓝之中。智商极高，能识别镜中的自己。',
+        size: '700cm', temp: '20-26°C', depth: '0-120m', lifespan: '40年+', difficulty: 0,
+        region: '全球温带至热带海域'
+    },
+    {
+        id: 7,
+        name: '海葵鱼',
+        nameEn: 'Anemonefish',
+        latin: 'Amphiprion perideraion',
+        emoji: '🪸',
+        category: ['tropical', 'reef'],
+        color: 'var(--shell)',
+        bgGradient: 'linear-gradient(135deg, var(--shell), var(--icecream))',
+        tags: [
+            { text: '热带', bg: 'var(--shell)', color: '#8a5a4a' },
+            { text: '共生', bg: 'var(--icecream)', color: '#8a3a5a' }
+        ],
+        desc: '粉嫩的体色如沙滩贝壳般温柔，常栖息于海葵触手之间，与宿主互利共生，构成海底的温馨画面。',
+        size: '10cm', temp: '24-28°C', depth: '3-20m', lifespan: '6-10年', difficulty: 2,
+        region: '西太平洋'
+    },
+    {
+        id: 8,
+        name: '翻车鱼',
+        nameEn: 'Ocean Sunfish',
+        latin: 'Mola mola',
+        emoji: '☀️',
+        category: ['deep', 'rare'],
+        color: 'var(--watermelon)',
+        bgGradient: 'linear-gradient(135deg, var(--watermelon), var(--seagull))',
+        tags: [
+            { text: '深海', bg: 'var(--watermelon)', color: '#2a6b4a' },
+            { text: '珍稀', bg: 'var(--lemon)', color: '#7a6a2a' }
+        ],
+        desc: '世界上最重的硬骨鱼，扁平的身形像一块巨型西瓜冰沙，常在海面懒洋洋地翻晒太阳，呆萌可爱。',
+        size: '300cm', temp: '12-25°C', depth: '0-600m', lifespan: '20年+', difficulty: 0,
+        region: '全球温带至热带海域'
+    },
+    {
+        id: 9,
+        name: '紫罗兰刺尾鱼',
+        nameEn: 'Purple Tang',
+        latin: 'Zebrasoma xanthurum',
+        emoji: '💜',
+        category: ['tropical', 'reef'],
+        color: 'var(--breeze)',
+        bgGradient: 'linear-gradient(135deg, var(--breeze), var(--icecream))',
+        tags: [
+            { text: '热带', bg: 'var(--breeze)', color: '#3a5a8a' },
+            { text: '珊瑚礁', bg: 'var(--icecream)', color: '#8a3a5a' }
+        ],
+        desc: '身着优雅紫蓝色外衣，黄色尾鳍如画龙点睛。性格领地意识强，却是珊瑚缸中最受欢迎的观赏鱼之一。',
+        size: '25cm', temp: '24-28°C', depth: '2-20m', lifespan: '10年+', difficulty: 3,
+        region: '红海-印度洋'
+    },
+    {
+        id: 10,
+        name: '花斑连鳍䲗',
+        nameEn: 'Mandarin Fish',
+        latin: 'Synchiropus splendidus',
+        emoji: '🎨',
+        category: ['tropical', 'reef', 'rare'],
+        color: 'var(--mint)',
+        bgGradient: 'linear-gradient(135deg, var(--mint), var(--watermelon))',
+        tags: [
+            { text: '珍稀', bg: 'var(--mint)', color: '#2a6b5a' },
+            { text: '珊瑚礁', bg: 'var(--watermelon)', color: '#2a6b4a' }
+        ],
+        desc: '被誉为「海洋调色板」，全身布满迷幻的蓝绿橙纹路。如同海洋薄荷与西瓜冰沙的碰撞，美得令人窒息。',
+        size: '6cm', temp: '24-27°C', depth: '1-18m', lifespan: '10-15年', difficulty: 5,
+        region: '西太平洋'
+    },
+    {
+        id: 11,
+        name: '锤头鲨',
+        nameEn: 'Hammerhead Shark',
+        latin: 'Sphyrna mokarran',
+        emoji: '🦈',
+        category: ['deep'],
+        color: 'var(--seagull)',
+        bgGradient: 'linear-gradient(135deg, var(--seagull), var(--breeze))',
+        tags: [
+            { text: '深海', bg: 'var(--seagull)', color: '#2a5a6a' },
+            { text: '顶级掠食者', bg: 'var(--soda)', color: '#2a5a7a' }
+        ],
+        desc: '独特的T字形头部赋予了它卓越的视野与电感应能力。如超级海鸥般俯瞰海洋的王者，强健而神秘。',
+        size: '600cm', temp: '20-28°C', depth: '0-300m', lifespan: '20-30年', difficulty: 0,
+        region: '全球温带至热带海域'
+    },
+    {
+        id: 12,
+        name: '纹身神仙鱼',
+        nameEn: 'Emperor Angelfish',
+        latin: 'Pomacanthus imperator',
+        emoji: '👑',
+        category: ['tropical', 'reef'],
+        color: 'var(--soda)',
+        bgGradient: 'linear-gradient(135deg, var(--soda), var(--lemon))',
+        tags: [
+            { text: '热带', bg: 'var(--soda)', color: '#2a5a7a' },
+            { text: '珊瑚礁', bg: 'var(--lemon)', color: '#7a6a2a' }
+        ],
+        desc: '蓝黄相间的条纹如夏日便利店汽水与冰镇柠檬的完美交融。幼鱼与成鱼的花纹截然不同，仿佛两种鱼。',
+        size: '40cm', temp: '22-28°C', depth: '1-100m', lifespan: '15年+', difficulty: 4,
+        region: '印度洋-太平洋'
+    }
+];
+
+// ========== 渲染逻辑 ==========
+let currentFilter = 'all';
+
+function createFishCard(fish) {
+    const diffDots = Array.from({length: 5}, (_, i) =>
+        `<div class="dot ${i < fish.difficulty ? 'filled' : ''}"></div>`
+    ).join('');
+
+    const tags = fish.tags.map(t =>
+        `<span class="meta-tag" style="background:${t.bg};color:${t.color}">${t.text}</span>`
+    ).join('');
+
+    return `
+        <div class="fish-card" data-category='${JSON.stringify(fish.category)}' data-name="${fish.name}" data-nameen="${fish.nameEn}" data-latin="${fish.latin}" onclick="openModal(${fish.id})">
+            <div class="card-visual" style="background:${fish.bgGradient}">
+                <div class="ripple" style="background:${fish.color}"></div>
+                <div class="fish-emoji">${fish.emoji}</div>
+            </div>
+            <div class="card-body">
+                <div class="fish-name-cn">${fish.name}</div>
+                <div class="fish-name-en">${fish.nameEn} · <em>${fish.latin}</em></div>
+                <div class="fish-meta">${tags}</div>
+                <div class="fish-desc">${fish.desc}</div>
+                <div class="fish-footer">
+                    <div class="difficulty" title="饲养难度 ${fish.difficulty}/5">${diffDots}</div>
+                    <button class="btn-detail">探索 →</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderGrid(data) {
+    document.getElementById('fishGrid').innerHTML = data.map(createFishCard).join('');
+}
+
+function filterFish() {
+    const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+    const filtered = fishData.filter(f => {
+        const matchCategory = currentFilter === 'all' || f.category.includes(currentFilter);
+        const matchSearch = !keyword ||
+            f.name.toLowerCase().includes(keyword) ||
+            f.nameEn.toLowerCase().includes(keyword) ||
+            f.latin.toLowerCase().includes(keyword);
+        return matchCategory && matchSearch;
+    });
+    renderGrid(filtered);
+    document.getElementById('totalCount').textContent = filtered.length;
+}
+
+function setFilter(cat, el) {
+    currentFilter = cat;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    filterFish();
+}
+
+// ========== 弹窗逻辑 ==========
+function openModal(id) {
+    const fish = fishData.find(f => f.id === id);
+    if (!fish) return;
+    document.getElementById('modalHeader').style.background = fish.bgGradient;
+    document.getElementById('modalEmoji').textContent = fish.emoji;
+    document.getElementById('modalEmoji').style.fontSize = '100px';
+    document.getElementById('modalName').textContent = fish.name + ' ' + fish.nameEn;
+    document.getElementById('modalLatin').textContent = fish.latin;
+    document.getElementById('modalDesc').textContent = fish.desc;
+    document.getElementById('modalAttrs').innerHTML = `
+        <div class="modal-attr"><div class="val">${fish.size}</div><div class="lbl">体长</div></div>
+        <div class="modal-attr"><div class="val">${fish.temp}</div><div class="lbl">适宜水温</div></div>
+        <div class="modal-attr"><div class="val">${fish.depth}</div><div class="lbl">活动深度</div></div>
+        <div class="modal-attr"><div class="val">${fish.lifespan}</div><div class="lbl">寿命</div></div>
+        <div class="modal-attr" style="grid-column:span 2"><div class="val">${fish.region}</div><div class="lbl">分布海域</div></div>
+    `;
+    document.getElementById('modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+    if (e && e.target !== document.getElementById('modal') && e.type === 'click') return;
+    document.getElementById('modal').classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// 初始渲染
+renderGrid(fishData);
+</script>
+</body>
+</html>
