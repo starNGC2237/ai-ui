@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>水界漫游 · 中国原生观赏鱼图鉴</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      color:#2c3e50;background:#f0f6fb;line-height:1.6;overflow-x:hidden;
+    }
+
+    /* ===== Animated water‑ripple background ===== */
+    .water-bg{
+      position:fixed;inset:0;z-index:-1;
+      background:linear-gradient(180deg,#e8f4f8 0%,#d1ecf9 40%,#b8dff0 100%);
+    }
+    .water-bg::after{
+      content:"";position:absolute;inset:0;
+      background:repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,.12) 60px,
+        rgba(255,255,255,.12) 62px
+      );
+      animation:drift 8s linear infinite;
+    }
+    @keyframes drift{0%{background-position-y:0}100%{background-position-y:62px}}
+
+    /* ===== Header / Hero ===== */
+    .hero{
+      text-align:center;padding:56px 20px 40px;
+      background:linear-gradient(135deg,#0b7daa 0%,#1a9dc3 50%,#26b0a0 100%);
+      color:#fff;position:relative;overflow:hidden;
+    }
+    .hero::after{
+      content:"";position:absolute;bottom:-2px;left:0;right:0;height:48px;
+      background:url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 24 Q150 0 300 24 T600 24 T900 24 T1200 24 V48 H0Z' fill='%23f0f6fb'/%3E%3C/svg%3E") center bottom/cover no-repeat;
+    }
+    .hero-badge{
+      display:inline-block;padding:4px 16px;border:1px solid rgba(255,255,255,.5);
+      border-radius:20px;font-size:13px;letter-spacing:2px;margin-bottom:12px;opacity:.9;
+    }
+    .hero h1{font-size:clamp(28px,5vw,42px);font-weight:700;margin-bottom:8px;text-shadow:0 2px 6px rgba(0,0,0,.15)}
+    .hero p{max-width:520px;margin:0 auto;font-size:15px;opacity:.92;line-height:1.7}
+
+    /* ===== Section headings ===== */
+    .section-title{
+      text-align:center;margin:48px auto 28px;max-width:640px;padding:0 20px;
+    }
+    .section-title h2{
+      font-size:clamp(22px,3.6vw,30px);color:#0b7daa;position:relative;display:inline-block;
+    }
+    .section-title h2::after{
+      content:"";display:block;width:48px;height:3px;border-radius:2px;
+      background:linear-gradient(90deg,#1a9dc3,#26b0a0);margin:8px auto 0;
+    }
+    .section-title p{margin-top:10px;font-size:14px;color:#607d8b}
+
+    /* ===== Fish card grid ===== */
+    .fish-grid{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:24px;max-width:1080px;margin:0 auto 48px;padding:0 20px;
+    }
+    .fish-card{
+      background:#fff;border-radius:16px;overflow:hidden;
+      box-shadow:0 4px 20px rgba(11,125,170,.08);
+      transition:transform .3s,box-shadow .3s;
+    }
+    .fish-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(11,125,170,.15)}
+
+    /* Illustration area — decorative SVG placeholder */
+    .fish-illust{
+      height:180px;display:flex;align-items:center;justify-content:center;
+      position:relative;overflow:hidden;
+    }
+    .fish-illust .icon{font-size:64px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));z-index:1}
+    .fish-illust .bg-blob{
+      position:absolute;width:200%;height:200%;border-radius:42%;opacity:.18;
+      animation:spin 20s linear infinite;
+    }
+    @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+
+    .fish-body{padding:20px 22px 24px}
+    .fish-body h3{font-size:20px;margin-bottom:2px;color:#1a2a3a}
+    .fish-latin{font-size:13px;font-style:italic;color:#90a4ae;margin-bottom:10px}
+    .fish-body p{font-size:14px;color:#546e7a;line-height:1.75}
+
+    .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+    .tag{
+      display:inline-block;padding:3px 10px;border-radius:12px;font-size:12px;
+      background:#e8f5fa;color:#0b7daa;
+    }
+
+    /* ===== Knowledge section ===== */
+    .knowledge{
+      max-width:760px;margin:0 auto 56px;padding:0 20px;
+    }
+    .knowledge-item{
+      background:#fff;border-radius:14px;padding:24px 28px;
+      margin-bottom:16px;box-shadow:0 2px 12px rgba(11,125,170,.06);
+    }
+    .knowledge-item h4{font-size:16px;color:#0b7daa;margin-bottom:6px}
+    .knowledge-item p{font-size:14px;color:#546e7a;line-height:1.8}
+
+    /* ===== Footer ===== */
+    footer{
+      text-align:center;padding:32px 20px 40px;font-size:13px;color:#90a4ae;
+      background:linear-gradient(180deg,#f0f6fb,#dff0fa);
+    }
+    footer .logo-text{font-size:16px;font-weight:600;color:#0b7daa;margin-bottom:4px}
+
+    /* ===== Utilities ===== */
+    @media(max-width:640px){
+      .fish-grid{grid-template-columns:1fr}
+      .hero{padding:44px 16px 36px}
+    }
+  </style>
+</head>
+<body>
+<div class="water-bg"></div>
+
+<!-- ====== Hero ====== -->
+<header class="hero">
+  <span class="hero-badge">水界漫游 · 限时活动</span>
+  <h1>🐟 中国原生观赏鱼图鉴</h1>
+  <p>探索藏在溪流、湖泊与山涧中的自然之美——<br/>发现那些色彩斑斓、姿态万千的中国原生鱼类</p>
+</header>
+
+<!-- ====== 鱼类卡片 ====== -->
+<section>
+  <div class="section-title">
+    <h2>明星鱼种</h2>
+    <p>以下精选八种最具代表性的中国原生观赏鱼，带你领略水下的东方之美</p>
+  </div>
+
+  <div class="fish-grid">
+
+    <!-- 1 中国斗鱼 -->
+    <article class="fish-card">
+      <div class="fish-illust" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)">
+        <div class="bg-blob" style="background:#42a5f5"></div>
+        <span class="icon">🐠</span>
+      </div>
+      <div class="fish-body">
+        <h3>中国斗鱼</h3>
+        <p class="fish-latin">Macropodus opercularis</p>
+        <p>又名"天堂鱼"，体色瑰丽、性格刚烈，是最早被引入欧洲的观赏鱼之一。雄鱼尾鳍舒展如旗，红蓝交织，极具观赏价值。</p>
+        <div class="tag-row">
+          <span class="tag">华南溪流</span>
+          <span class="tag">迷鳃鱼</span>
+          <span class="tag">易饲养</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2 白云金丝 -->
+    <article class="fish-card">
+      <div class="fish-illust" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)">
+        <div class="bg-blob" style="background:#66bb6a"></div>
+        <span class="icon">✨</span>
+      </div>
+      <div class="fish-body">
+        <h3>白云金丝</h3>
+        <p class="fish-latin">Tanichthys albonubes</p>
+        <p>发现于广州白云山的珍贵小型鱼，身披金色纵纹，群游时如星河流转。曾一度被认为野外灭绝，近年重新发现野生种群。</p>
+        <div class="tag-row">
+          <span class="tag">广东特有</span>
+          <span class="tag">群游鱼</span>
+          <span class="tag">冷水鱼</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3 中华鳑鲏 -->
+    <article class="fish-card">
+      <div class="fish-illust" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)">
+        <div class="bg-blob" style="background:#ef5350"></div>
+        <span class="icon">🌸</span>
+      </div>
+      <div class="fish-body">
+        <h3>中华鳑鲏</h3>
+        <p class="fish-latin">Rhodeus sinensis</p>
+        <p>体型小巧、色彩绚丽的淡水精灵。繁殖期雄鱼呈现出惊艳的彩虹色泽，需借助河蚌产卵，与蚌类形成奇妙的共生关系。</p>
+        <div class="tag-row">
+          <span class="tag">全国分布</span>
+          <span class="tag">与蚌共生</span>
+          <span class="tag">微型鱼</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4 金鱼 -->
+    <article class="fish-card">
+      <div class="fish-illust" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2)">
+        <div class="bg-blob" style="background:#ffa726"></div>
+        <span class="icon">🐡</span>
+      </div>
+      <div class="fish-body">
+        <h3>金鱼</h3>
+        <p class="fish-latin">Carassius auratus</p>
+        <p>中国对世界观赏鱼文化最重要的贡献，由野生鲫鱼经千年选育而来。品种繁多，从兰寿到蝶尾，承载着深厚的东方美学传统。</p>
+        <div class="tag-row">
+          <span class="tag">千年选育</span>
+          <span class="tag">品种丰富</span>
+          <span class="tag">国鱼</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5 胭脂鱼 -->
+    <article class="fish-card">
+      <div class="fish-illust" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7)">
+        <div class="bg-blob" style="background:#ab47bc"></div>
+        <span class="icon">🎏</span>
+      </div>
+      <div class="fish-body">
+        <h3>胭脂鱼</h3>
+        <p class="fish-latin">Myxocyprinus asiaticus</p>
+        <p>国家二级保护动物，幼鱼体态优雅、色如胭脂，被誉为"一帆风顺"。背鳍高耸似帆，是长江流域最美丽的大型原生鱼之一。</p>
+        <div class="tag-row">
+          <span class="tag">长江流域</span>
+          <span class="tag">国家保护</span>
+          <span class="tag">大型鱼</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6 溪吻虾虎鱼 -->
+    <article class="fish-card">
+      <div class="fish-illust" style="background:linear-gradient(135deg,#e0f2f1,#b2dfdb)">
+        <div class="bg-blob" style="background:#26a69a"></div>
+        <span class="icon">🪨</span>
+      </div>
+      <div class="fish-body">
+        <h3>溪吻虾虎鱼</h3>
+        <p class="fish-latin">Rhinogobius duospilus</p>
+        <p>栖息于山间清溪的底栖小鱼，雄鱼面颊绘有鲜艳的红蓝斑纹，如同水下的微型艺术品。近年成为原生鱼缸造景的热门选择。</p>
+        <div class="tag-row">
+          <span class="tag">山溪底栖</span>
+          <span class="tag">虾虎科</span>
+          <span class="tag">造景热门</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 7 宽鳍鱲 -->
+    <article class="fish-card">
+      <div class="fish-illust" style="background:linear-gradient(135deg,#e8eaf6,#c5cae9)">
+        <div class="bg-blob" style="background:#5c6bc0"></div>
+        <span class="icon">💎</span>
+      </div>
+      <div class="fish-body">
+        <h3>宽鳍鱲</h3>
+        <p class="fish-latin">Zacco platypus</p>
+        <p>溪流中的"彩虹武士"，繁殖期雄鱼体侧出现绚丽的玫红与蓝紫色婚姻色，鳍缘镶有亮丽的色带，是原生溪流缸的明星物种。</p>
+        <div class="tag-row">
+          <span class="tag">溪流鱼</span>
+          <span class="tag">婚姻色</span>
+          <span class="tag">活泼好动</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 8 圆尾斗鱼 -->
+    <article class="fish-card">
+      <div class="fish-illust" style="background:linear-gradient(135deg,#efebe9,#d7ccc8)">
+        <div class="bg-blob" style="background:#8d6e63"></div>
+        <span class="icon">🍂</span>
+      </div>
+      <div class="fish-body">
+        <h3>圆尾斗鱼</h3>
+        <p class="fish-latin">Macropodus ocellatus</p>
+        <p>分布于中国北方的斗鱼品种，耐寒性极强，可在接近冰点的水温中生存。尾鳍圆润、眼斑醒目，是北方原生鱼爱好者的首选。</p>
+        <div class="tag-row">
+          <span class="tag">华北分布</span>
+          <span class="tag">极耐低温</span>
+          <span class="tag">迷鳃鱼</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ====== 科普知识 ====== -->
+<section>
+  <div class="section-title">
+    <h2>原生鱼小课堂</h2>
+    <p>了解更多关于中国原生观赏鱼的趣味知识</p>
+  </div>
+
+  <div class="knowledge">
+    <div class="knowledge-item">
+      <h4>🌿 什么是原生鱼？</h4>
+      <p>原生鱼指在某一地区自然演化、未经人工引入的本土鱼类。中国拥有超过 1,500 种淡水鱼，其中许多具有极高的观赏价值，却长期不为大众所知。</p>
+    </div>
+    <div class="knowledge-item">
+      <h4>🏞️ 为什么要关注原生鱼？</h4>
+      <p>饲养原生观赏鱼不仅能欣赏自然之美，还有助于提高公众对本土水生生态的保护意识。相比外来物种，原生鱼更适应本地水质，饲养难度往往更低。</p>
+    </div>
+    <div class="knowledge-item">
+      <h4>🔬 如何开始原生鱼饲养？</h4>
+      <p>建议从白云金丝、中国斗鱼等易饲养品种入手，使用原生造景（溪流石、水草、沉木）模拟自然栖息地。切勿从野外捕捉保护物种，请通过正规渠道获取人工繁殖个体。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Footer ====== -->
+<footer>
+  <div class="logo-text">水界漫游</div>
+  <p>探索水下世界 · 守护原生之美</p>
+  <p style="margin-top:8px">© 2026 水界漫游 · 中国原生观赏鱼图鉴活动页</p>
+</footer>
+
+</body>
+</html>
