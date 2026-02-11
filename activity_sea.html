@@ -7,22 +7,22 @@
     <style>
         /* ========== 超级海鸥主题色彩系统 ========== */
         :root {
-            --soda:          #87D4F9; /* 便利店汽水 */
-            --lemon:         #FFEA92; /* 冰镇柠檬 */
-            --watermelon:    #A4E2B8; /* 西瓜冰沙 */
-            --sunset:        #FFC8A2; /* 海岸黄昏 */
-            --breeze:        #C0DAFF; /* 空调凉风 */
-            --icecream:      #FFD9E8; /* 草莓雪糕 */
-            --mint:          #B2F5EA; /* 海洋薄荷 */
-            --shell:         #FCD5CE; /* 沙滩贝壳 */
-            --seagull:       #9AD3DE; /* 超级海鸥 */
+            --soda:          oklch(0.8333 0.0921 230.07); /* 便利店汽水 */
+            --lemon:         oklch(0.9351 0.1106 96.34);  /* 冰镇柠檬 */
+            --watermelon:    oklch(0.8594 0.0859 154.62); /* 西瓜冰沙 */
+            --sunset:        oklch(0.8725 0.0805 56.06);  /* 海岸黄昏 */
+            --breeze:        oklch(0.8813 0.0585 257.18); /* 空调凉风 */
+            --icecream:      oklch(0.9214 0.0463 352.31); /* 草莓雪糕 */
+            --mint:          oklch(0.9225 0.0685 183.53); /* 海洋薄荷 */
+            --shell:         oklch(0.9041 0.045 29.92);   /* 沙滩贝壳 */
+            --seagull:       oklch(0.8314 0.0603 210.82); /* 超级海鸥 */
 
-            --text-dark:     #2C3E50;
-            --text-mid:      #4A6572;
-            --text-light:    #7A9AAF;
-            --white:         #FFFFFF;
-            --bg-main:       #F0FAFE;
-            --card-shadow:   rgba(154, 211, 222, 0.25);
+            --text-dark:     oklch(0.3564 0.0391 248.97);
+            --text-mid:      oklch(0.4904 0.0381 229.15);
+            --text-light:    oklch(0.6695 0.0474 237.18);
+            --white:         oklch(1.0 0 none);
+            --bg-main:       oklch(0.9788 0.0119 223.52);
+            --card-shadow:   oklch(0.8314 0.0603 210.82 / 0.25);
         }
 
         /* ========== 基础重置 ========== */
@@ -154,7 +154,7 @@
             position: absolute;
             top: -50%; right: -30%;
             width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 70%);
+            background: radial-gradient(circle, oklch(1.0 0 none / 0.3), transparent 70%);
             border-radius: 50%;
         }
         .hero-banner::after {
@@ -171,7 +171,7 @@
         .hero-logo {
             font-size: 14px;
             color: var(--white);
-            background: rgba(255,255,255,0.25);
+            background: oklch(1.0 0 none / 0.25);
             display: inline-block;
             padding: 4px 16px;
             border-radius: 20px;
@@ -183,7 +183,7 @@
             font-size: 32px;
             font-weight: 800;
             color: var(--white);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-shadow: 0 2px 8px oklch(0 0 none / 0.08);
             margin-bottom: 8px;
         }
         .hero-title span {
@@ -195,11 +195,11 @@
             margin-left: 6px;
             font-size: 18px;
             vertical-align: middle;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 6px oklch(0 0 none / 0.06);
         }
         .hero-sub {
             font-size: 15px;
-            color: rgba(255,255,255,0.9);
+            color: oklch(1.0 0 none / 0.9);
             margin-top: 8px;
         }
         .hero-tags {
@@ -210,13 +210,13 @@
             margin-top: 20px;
         }
         .hero-tag {
-            background: rgba(255,255,255,0.3);
+            background: oklch(1.0 0 none / 0.3);
             backdrop-filter: blur(6px);
             color: var(--white);
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 13px;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid oklch(1.0 0 none / 0.3);
         }
 
         /* ========== 统计栏 ========== */
@@ -308,7 +308,7 @@
         }
         .fish-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 36px rgba(154, 211, 222, 0.35);
+            box-shadow: 0 12px 36px oklch(0.8314 0.0603 210.82 / 0.35);
         }
         .fish-card .card-visual {
             height: 180px;
@@ -322,7 +322,7 @@
             font-size: 72px;
             z-index: 1;
             transition: transform .4s;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 4px 8px oklch(0 0 none / 0.1));
         }
         .fish-card:hover .fish-emoji { transform: scale(1.12) rotate(-3deg); }
         .card-visual .ripple {
@@ -377,7 +377,7 @@
             align-items: center;
             margin-top: 14px;
             padding-top: 12px;
-            border-top: 1px solid #f0f4f8;
+            border-top: 1px solid oklch(0.9653 0.0069 247.9);
         }
         .difficulty {
             display: flex;
@@ -386,7 +386,7 @@
         .difficulty .dot {
             width: 8px; height: 8px;
             border-radius: 50%;
-            background: #e0e8f0;
+            background: oklch(0.9273 0.0139 247.98);
         }
         .difficulty .dot.filled { background: var(--seagull); }
         .btn-detail {
@@ -410,7 +410,7 @@
             align-items: center;
             gap: 24px;
             margin-bottom: 36px;
-            box-shadow: 0 4px 20px rgba(252, 213, 206, 0.35);
+            box-shadow: 0 4px 20px oklch(0.9041 0.045 29.92 / 0.35);
         }
         .promo-icon { font-size: 56px; flex-shrink: 0; }
         .promo-text h3 {
@@ -527,7 +527,7 @@
             width: 14px; height: 14px;
             border-radius: 50%;
             border: 2px solid var(--white);
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            box-shadow: 0 1px 4px oklch(0 0 none / 0.08);
             transition: transform .2s;
             cursor: pointer;
         }
@@ -538,7 +538,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.3);
+            background: oklch(0 0 none / 0.3);
             backdrop-filter: blur(6px);
             z-index: 1000;
             align-items: center;
@@ -553,7 +553,7 @@
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 60px oklch(0 0 none / 0.15);
             animation: slideUp .35s ease;
         }
         @keyframes slideUp {
@@ -573,7 +573,7 @@
             top: 16px; right: 16px;
             width: 36px; height: 36px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.8);
+            background: oklch(1.0 0 none / 0.8);
             border: none;
             font-size: 18px;
             cursor: pointer;
@@ -802,8 +802,8 @@ const fishData = [
         color: 'var(--sunset)',
         bgGradient: 'linear-gradient(135deg, var(--sunset), var(--lemon))',
         tags: [
-            { text: '热带', bg: 'var(--sunset)', color: '#7a4a2a' },
-            { text: '珊瑚礁', bg: 'var(--mint)', color: '#2a6b5a' }
+            { text: '热带', bg: 'var(--sunset)', color: 'oklch(0.4579 0.08 53.08)' },
+            { text: '珊瑚礁', bg: 'var(--mint)', color: 'oklch(0.4806 0.072 173.2)' }
         ],
         desc: '与海葵共生的热带鱼，身披鲜亮的橙白条纹，是海洋中的人气明星。性格勇敢，常勇于保护自己的领地。',
         size: '11cm', temp: '25-28°C', depth: '1-15m', lifespan: '6-10年', difficulty: 2,
@@ -819,8 +819,8 @@ const fishData = [
         color: 'var(--soda)',
         bgGradient: 'linear-gradient(135deg, var(--soda), var(--breeze))',
         tags: [
-            { text: '热带', bg: 'var(--soda)', color: '#2a5a7a' },
-            { text: '珊瑚礁', bg: 'var(--breeze)', color: '#3a5a8a' }
+            { text: '热带', bg: 'var(--soda)', color: 'oklch(0.449 0.074 240.39)' },
+            { text: '珊瑚礁', bg: 'var(--breeze)', color: 'oklch(0.4657 0.0872 258.28)' }
         ],
         desc: '拥有宝石般的钴蓝色身体与鲜黄尾鳍。性情活泼好动，在珊瑚丛间穿梭时宛如一抹便利店汽水的清凉蓝。',
         size: '31cm', temp: '24-28°C', depth: '2-40m', lifespan: '8-20年', difficulty: 3,
@@ -836,8 +836,8 @@ const fishData = [
         color: 'var(--icecream)',
         bgGradient: 'linear-gradient(135deg, var(--icecream), var(--shell))',
         tags: [
-            { text: '珍稀', bg: 'var(--icecream)', color: '#8a3a5a' },
-            { text: '有毒', bg: 'var(--shell)', color: '#8a5a4a' }
+            { text: '珍稀', bg: 'var(--icecream)', color: 'oklch(0.4658 0.1145 357.43)' },
+            { text: '有毒', bg: 'var(--shell)', color: 'oklch(0.516 0.0685 39.2)' }
         ],
         desc: '华丽的鳍条如羽毛般展开，美丽却暗藏危机——它的棘刺含有毒液。如同草莓雪糕般甜美的外表下是不可小觑的实力。',
         size: '38cm', temp: '22-28°C', depth: '1-50m', lifespan: '10-15年', difficulty: 4,
@@ -853,8 +853,8 @@ const fishData = [
         color: 'var(--lemon)',
         bgGradient: 'linear-gradient(135deg, var(--lemon), var(--sunset))',
         tags: [
-            { text: '热带', bg: 'var(--lemon)', color: '#7a6a2a' },
-            { text: '素食', bg: 'var(--watermelon)', color: '#2a6b4a' }
+            { text: '热带', bg: 'var(--lemon)', color: 'oklch(0.5261 0.0856 95.23)' },
+            { text: '素食', bg: 'var(--watermelon)', color: 'oklch(0.4761 0.0858 158.39)' }
         ],
         desc: '通体明黄如冰镇柠檬，是珊瑚礁中最醒目的存在。以藻类为食，是海洋清洁工的一员，性格温和。',
         size: '20cm', temp: '24-28°C', depth: '2-46m', lifespan: '30年+', difficulty: 2,
@@ -870,8 +870,8 @@ const fishData = [
         color: 'var(--seagull)',
         bgGradient: 'linear-gradient(135deg, var(--seagull), var(--mint))',
         tags: [
-            { text: '珍稀', bg: 'var(--seagull)', color: '#2a5a6a' },
-            { text: '独特', bg: 'var(--mint)', color: '#2a6b5a' }
+            { text: '珍稀', bg: 'var(--seagull)', color: 'oklch(0.4411 0.0581 222.38)' },
+            { text: '独特', bg: 'var(--mint)', color: 'oklch(0.4806 0.072 173.2)' }
         ],
         desc: '形态独特的海洋精灵，直立游动的姿态优雅迷人。雄性海马负责孕育后代，是自然界中令人惊叹的父亲。',
         size: '17cm', temp: '22-27°C', depth: '1-20m', lifespan: '1-5年', difficulty: 5,
@@ -887,8 +887,8 @@ const fishData = [
         color: 'var(--breeze)',
         bgGradient: 'linear-gradient(135deg, var(--breeze), var(--soda))',
         tags: [
-            { text: '深海', bg: 'var(--breeze)', color: '#3a5a8a' },
-            { text: '珍稀', bg: 'var(--seagull)', color: '#2a5a6a' }
+            { text: '深海', bg: 'var(--breeze)', color: 'oklch(0.4657 0.0872 258.28)' },
+            { text: '珍稀', bg: 'var(--seagull)', color: 'oklch(0.4411 0.0581 222.38)' }
         ],
         desc: '翼展可达7米的海洋巨人，如同空调凉风般优雅地滑翔于深蓝之中。智商极高，能识别镜中的自己。',
         size: '700cm', temp: '20-26°C', depth: '0-120m', lifespan: '40年+', difficulty: 0,
@@ -904,8 +904,8 @@ const fishData = [
         color: 'var(--shell)',
         bgGradient: 'linear-gradient(135deg, var(--shell), var(--icecream))',
         tags: [
-            { text: '热带', bg: 'var(--shell)', color: '#8a5a4a' },
-            { text: '共生', bg: 'var(--icecream)', color: '#8a3a5a' }
+            { text: '热带', bg: 'var(--shell)', color: 'oklch(0.516 0.0685 39.2)' },
+            { text: '共生', bg: 'var(--icecream)', color: 'oklch(0.4658 0.1145 357.43)' }
         ],
         desc: '粉嫩的体色如沙滩贝壳般温柔，常栖息于海葵触手之间，与宿主互利共生，构成海底的温馨画面。',
         size: '10cm', temp: '24-28°C', depth: '3-20m', lifespan: '6-10年', difficulty: 2,
@@ -921,8 +921,8 @@ const fishData = [
         color: 'var(--watermelon)',
         bgGradient: 'linear-gradient(135deg, var(--watermelon), var(--seagull))',
         tags: [
-            { text: '深海', bg: 'var(--watermelon)', color: '#2a6b4a' },
-            { text: '珍稀', bg: 'var(--lemon)', color: '#7a6a2a' }
+            { text: '深海', bg: 'var(--watermelon)', color: 'oklch(0.4761 0.0858 158.39)' },
+            { text: '珍稀', bg: 'var(--lemon)', color: 'oklch(0.5261 0.0856 95.23)' }
         ],
         desc: '世界上最重的硬骨鱼，扁平的身形像一块巨型西瓜冰沙，常在海面懒洋洋地翻晒太阳，呆萌可爱。',
         size: '300cm', temp: '12-25°C', depth: '0-600m', lifespan: '20年+', difficulty: 0,
@@ -938,8 +938,8 @@ const fishData = [
         color: 'var(--breeze)',
         bgGradient: 'linear-gradient(135deg, var(--breeze), var(--icecream))',
         tags: [
-            { text: '热带', bg: 'var(--breeze)', color: '#3a5a8a' },
-            { text: '珊瑚礁', bg: 'var(--icecream)', color: '#8a3a5a' }
+            { text: '热带', bg: 'var(--breeze)', color: 'oklch(0.4657 0.0872 258.28)' },
+            { text: '珊瑚礁', bg: 'var(--icecream)', color: 'oklch(0.4658 0.1145 357.43)' }
         ],
         desc: '身着优雅紫蓝色外衣，黄色尾鳍如画龙点睛。性格领地意识强，却是珊瑚缸中最受欢迎的观赏鱼之一。',
         size: '25cm', temp: '24-28°C', depth: '2-20m', lifespan: '10年+', difficulty: 3,
@@ -955,8 +955,8 @@ const fishData = [
         color: 'var(--mint)',
         bgGradient: 'linear-gradient(135deg, var(--mint), var(--watermelon))',
         tags: [
-            { text: '珍稀', bg: 'var(--mint)', color: '#2a6b5a' },
-            { text: '珊瑚礁', bg: 'var(--watermelon)', color: '#2a6b4a' }
+            { text: '珍稀', bg: 'var(--mint)', color: 'oklch(0.4806 0.072 173.2)' },
+            { text: '珊瑚礁', bg: 'var(--watermelon)', color: 'oklch(0.4761 0.0858 158.39)' }
         ],
         desc: '被誉为「海洋调色板」，全身布满迷幻的蓝绿橙纹路。如同海洋薄荷与西瓜冰沙的碰撞，美得令人窒息。',
         size: '6cm', temp: '24-27°C', depth: '1-18m', lifespan: '10-15年', difficulty: 5,
@@ -972,8 +972,8 @@ const fishData = [
         color: 'var(--seagull)',
         bgGradient: 'linear-gradient(135deg, var(--seagull), var(--breeze))',
         tags: [
-            { text: '深海', bg: 'var(--seagull)', color: '#2a5a6a' },
-            { text: '顶级掠食者', bg: 'var(--soda)', color: '#2a5a7a' }
+            { text: '深海', bg: 'var(--seagull)', color: 'oklch(0.4411 0.0581 222.38)' },
+            { text: '顶级掠食者', bg: 'var(--soda)', color: 'oklch(0.449 0.074 240.39)' }
         ],
         desc: '独特的T字形头部赋予了它卓越的视野与电感应能力。如超级海鸥般俯瞰海洋的王者，强健而神秘。',
         size: '600cm', temp: '20-28°C', depth: '0-300m', lifespan: '20-30年', difficulty: 0,
@@ -989,8 +989,8 @@ const fishData = [
         color: 'var(--soda)',
         bgGradient: 'linear-gradient(135deg, var(--soda), var(--lemon))',
         tags: [
-            { text: '热带', bg: 'var(--soda)', color: '#2a5a7a' },
-            { text: '珊瑚礁', bg: 'var(--lemon)', color: '#7a6a2a' }
+            { text: '热带', bg: 'var(--soda)', color: 'oklch(0.449 0.074 240.39)' },
+            { text: '珊瑚礁', bg: 'var(--lemon)', color: 'oklch(0.5261 0.0856 95.23)' }
         ],
         desc: '蓝黄相间的条纹如夏日便利店汽水与冰镇柠檬的完美交融。幼鱼与成鱼的花纹截然不同，仿佛两种鱼。',
         size: '40cm', temp: '22-28°C', depth: '1-100m', lifespan: '15年+', difficulty: 4,
