@@ -1,0 +1,270 @@
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: #2c3e50;
+  background: #f0f6fb;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== Animated water‑ripple background ===== */
+.water-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, #e8f4f8 0%, #d1ecf9 40%, #b8dff0 100%);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 255, 255, .12) 60px,
+      rgba(255, 255, 255, .12) 62px
+    );
+    animation: drift 8s linear infinite;
+  }
+}
+
+@keyframes drift {
+  0% { background-position-y: 0 }
+  100% { background-position-y: 62px }
+}
+
+/* ===== Header / Hero ===== */
+.hero {
+  text-align: center;
+  padding: 56px 20px 40px;
+  background: linear-gradient(135deg, #0b7daa 0%, #1a9dc3 50%, #26b0a0 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 48px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 24 Q150 0 300 24 T600 24 T900 24 T1200 24 V48 H0Z' fill='%23f0f6fb'/%3E%3C/svg%3E") center bottom/cover no-repeat;
+  }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+  }
+
+  p {
+    max-width: 520px;
+    margin: 0 auto;
+    font-size: 15px;
+    opacity: .92;
+    line-height: 1.7;
+  }
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 4px 16px;
+  border: 1px solid rgba(255, 255, 255, .5);
+  border-radius: 20px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  opacity: .9;
+}
+
+/* ===== Section headings ===== */
+.section-title {
+  text-align: center;
+  margin: 48px auto 28px;
+  max-width: 640px;
+  padding: 0 20px;
+
+  h2 {
+    font-size: clamp(22px, 3.6vw, 30px);
+    color: #0b7daa;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #1a9dc3, #26b0a0);
+      margin: 8px auto 0;
+    }
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #607d8b;
+  }
+}
+
+/* ===== Fish card grid ===== */
+.fish-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1080px;
+  margin: 0 auto 48px;
+  padding: 0 20px;
+}
+
+.fish-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(11, 125, 170, .08);
+  transition: transform .3s, box-shadow .3s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(11, 125, 170, .15);
+  }
+}
+
+/* Illustration area — decorative SVG placeholder */
+.fish-illust {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  .icon {
+    font-size: 64px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .1));
+    z-index: 1;
+  }
+
+  .bg-blob {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    border-radius: 42%;
+    opacity: .18;
+    animation: spin 20s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0) }
+  100% { transform: rotate(360deg) }
+}
+
+.fish-body {
+  padding: 20px 22px 24px;
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 2px;
+    color: #1a2a3a;
+  }
+
+  p {
+    font-size: 14px;
+    color: #546e7a;
+    line-height: 1.75;
+  }
+}
+
+.fish-latin {
+  font-size: 13px;
+  font-style: italic;
+  color: #90a4ae;
+  margin-bottom: 10px;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  background: #e8f5fa;
+  color: #0b7daa;
+}
+
+/* ===== Knowledge section ===== */
+.knowledge {
+  max-width: 760px;
+  margin: 0 auto 56px;
+  padding: 0 20px;
+}
+
+.knowledge-item {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(11, 125, 170, .06);
+
+  h4 {
+    font-size: 16px;
+    color: #0b7daa;
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #546e7a;
+    line-height: 1.8;
+  }
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 32px 20px 40px;
+  font-size: 13px;
+  color: #90a4ae;
+  background: linear-gradient(180deg, #f0f6fb, #dff0fa);
+
+  .logo-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0b7daa;
+    margin-bottom: 4px;
+  }
+}
+
+/* ===== Utilities ===== */
+@media (max-width: 640px) {
+  .fish-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 44px 16px 36px;
+  }
+}
