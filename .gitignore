@@ -1,2 +1,6 @@
 node_modules/
 package-lock.json
+dist/
+.hbuilderx/
+unpackage/
+.DS_Store
